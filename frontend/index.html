@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Bug Tracker Lite</title>
+</head>
+<body>
+  <h1>Bug Tracker Lite</h1>
+  <form id="issueForm">
+    <input id="title" placeholder="Title" required />
+    <input id="priority" placeholder="Priority (low|medium|high)" />
+    <br/>
+    <textarea id="description" placeholder="Description"></textarea>
+    <br/>
+    <button type="submit">Create Issue</button>
+  </form>
+  <ul id="issues"></ul>
+  <script>
+    const API = 'http://localhost:4000/api';
+    async function load(){ 
+      const res = await fetch(API + '/issues'); 
+      const issues = await res.json();
+      const list = document.getElementById('issues');
+      list.innerHTML = '';
+      issues.forEach(i => {
+        const li = document.createElement('li');
+        li.textContent = `${i.title} [${i.priority}] - ${i.status}`;
+        list.appendChild(li);
+      });
+    }
+    document.getElementById('issueForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const desc = document.getElementById('description').value;
+      const pr = document.getElementById('priority').value || 'medium';
+      await fetch(API + '/issues', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ title, description: desc, priority: pr }) });
+      document.getElementById('title').value='';
+      document.getElementById('description').value='';
+      load();
+    });
+    load();
+  </script>
+</body>
+</html>
