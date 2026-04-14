@@ -9,4 +9,4 @@ A lightweight bug tracker with a minimal Express API and a vanilla JS frontend.
 2. Open frontend/index.html in your browser (or serve with a static server)
 ## QA notes
 - Add API tests in backend/tests, use Supertest and Jest.
-- Add end-to-end tests with Cypress (suggested)
+- Add end-to-end tests with Cypress
