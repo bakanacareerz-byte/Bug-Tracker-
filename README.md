@@ -1,4 +1,4 @@
-# Bug Tracker Lite (Full-stack starter)
+# Bug Tracker
 A lightweight bug tracker with a minimal Express API and a vanilla JS frontend.
 ## What is included
 - backend/: Express API with CRUD endpoints for issues
